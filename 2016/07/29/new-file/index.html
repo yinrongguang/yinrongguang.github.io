@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="pm,UI,RD," />
 
 
 
@@ -84,19 +84,22 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="description" content="K-Means聚类算法（一）：算法思路1、算法概述概览（本文）；2、是算法思路；3、代码实现和改进；4、数学原理。
+需要注意的是，数学原理并不是工作的过程或者算法的实现，这个实现起来很简单的算法有着不是那么单纯的背景，PRML一书中将其归类到“混合模型与EM”一章中去。而且，就算不知道原理我们也能把这个算法撸的很爽，所以在最后才会介绍。
+我会在（二）中提供我们自己实现的K-Means的算法的源代码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/07/28/hello-world/index.html">
+<meta property="og:title" content="newstarts">
+<meta property="og:url" content="http://yoursite.com/2016/07/29/new-file/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2016-07-29T02:14:05.711Z">
+<meta property="og:description" content="K-Means聚类算法（一）：算法思路1、算法概述概览（本文）；2、是算法思路；3、代码实现和改进；4、数学原理。
+需要注意的是，数学原理并不是工作的过程或者算法的实现，这个实现起来很简单的算法有着不是那么单纯的背景，PRML一书中将其归类到“混合模型与EM”一章中去。而且，就算不知道原理我们也能把这个算法撸的很爽，所以在最后才会介绍。
+我会在（二）中提供我们自己实现的K-Means的算法的源代码">
+<meta property="og:updated_time" content="2016-07-29T03:25:55.974Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="newstarts">
+<meta name="twitter:description" content="K-Means聚类算法（一）：算法思路1、算法概述概览（本文）；2、是算法思路；3、代码实现和改进；4、数学原理。
+需要注意的是，数学原理并不是工作的过程或者算法的实现，这个实现起来很简单的算法有着不是那么单纯的背景，PRML一书中将其归类到“混合模型与EM”一章中去。而且，就算不知道原理我们也能把这个算法撸的很爽，所以在最后才会介绍。
+我会在（二）中提供我们自己实现的K-Means的算法的源代码">
 
 
 
@@ -117,9 +120,9 @@ Quick">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/07/28/hello-world/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/07/29/new-file/"/>
 
-  <title> Hello World | Hexo </title>
+  <title> newstarts | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="">
@@ -239,7 +242,7 @@ Quick">
             
             
               
-                Hello World
+                newstarts
               
             
           </h1>
@@ -251,8 +254,8 @@ Quick">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T16:36:20+08:00" content="2016-07-28">
-              2016-07-28
+            <time itemprop="dateCreated" datetime="2016-07-29T11:16:41+08:00" content="2016-07-29">
+              2016-07-29
             </time>
           </span>
 
@@ -279,15 +282,11 @@ Quick">
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h3 id="K-Means聚类算法（一）：算法思路"><a href="#K-Means聚类算法（一）：算法思路" class="headerlink" title="K-Means聚类算法（一）：算法思路"></a>K-Means聚类算法（一）：算法思路</h3><p>1、算法概述概览（本文）；<br>2、是算法思路；<br>3、代码实现和改进；<br>4、数学原理。</p>
+<p>需要注意的是，数学原理并不是工作的过程或者算法的实现，这个实现起来很简单的算法有着不是那么单纯的背景，PRML一书中将其归类到“混合模型与EM”一章中去。而且，就算不知道原理我们也能把这个算法撸的很爽，所以在最后才会介绍。</p>
+<p>我会在（二）中提供我们自己实现的K-Means的算法的源代码，但是没有接触过这一类算法的筒子们最好自己动手试一下，这算法简单，可以不依赖一些矩阵计算数学库就较为轻松的实现，我这里采用Matlab，主要是因为画图演示方便，自己实现的时候可以使用C，Python，C++，Java，VB，C#等任何支持数组，且你熟悉的语言完成。</p>
+<p>所谓聚类算法是指将一堆没有标签的数据自动划分成几类的方法，这个方法要保证同一类的数据有相似的特征，如下图所示：</p>
+<p>K-Means算法的特点是类别的个数是人为给定的，如果让机器自己去找类别的个数，我们有AP聚类算法，先不说，说了就跑题了。<br>K-Means的一个重要的假设是：数据之间的相似度可以使用欧氏距离度量，如果不能使用欧氏距离度量，要先把数据转换到能用欧氏距离度量，这一点很重要。<br>（注：可以使用欧氏距离度量的意思就是欧氏距离越小，两个数据相似度越高）</p>
 
       
     </div>
@@ -308,18 +307,28 @@ Quick">
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/pm/" rel="tag">#pm</a>
+          
+            <a href="/tags/UI/" rel="tag">#UI</a>
+          
+            <a href="/tags/RD/" rel="tag">#RD</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/07/28/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/29/new-file/" rel="prev" title="newstarts">
-                newstarts <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -426,7 +435,7 @@ Quick">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#K-Means聚类算法（一）：算法思路"><span class="nav-number">1.</span> <span class="nav-text">K-Means聚类算法（一）：算法思路</span></a></li></ol></div>
             
           </div>
         </section>
